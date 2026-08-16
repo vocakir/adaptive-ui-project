@@ -1,0 +1,119 @@
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #1f2430;
+  --muted: #667085;
+  --line: #d9dde5;
+  --accent: #2f5eea;
+  --accent-soft: #e8eeff;
+  --warn: #b45309;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 14px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+h2 small { text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+.top {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+}
+.controls { display: flex; align-items: center; gap: 14px; }
+.switch { font-size: 13px; color: var(--muted); }
+.link {
+  background: none; border: none; padding: 0; font-size: 13px;
+  color: var(--accent); cursor: pointer; text-decoration: underline;
+}
+
+main { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; }
+@media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+
+.pane, .panel {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; padding: 16px;
+}
+.panel { margin-top: 12px; }
+
+.row { display: flex; gap: 8px; }
+input[type="text"], textarea {
+  flex: 1; padding: 9px 11px; font-size: inherit; font-family: inherit;
+  border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  width: 100%;
+}
+
+button {
+  padding: 9px 13px; font-size: 14px; font-family: inherit;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: #fff; color: var(--ink); cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.tasks { list-style: none; margin: 14px 0 6px; padding: 0; }
+.task {
+  padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px;
+  margin-bottom: 6px; cursor: pointer; background: #fff;
+}
+.task.selected { border-color: var(--accent); background: var(--accent-soft); }
+.task.done { text-decoration: line-through; color: var(--muted); }
+.empty { color: var(--muted); padding: 9px 2px; }
+
+/* Quick actions: the promoted controls */
+.quick-wrap {
+  background: var(--accent-soft); border: 1px solid #c7d6ff;
+  border-radius: 10px; padding: 12px 16px; margin-bottom: 14px;
+}
+.quick { display: flex; gap: 8px; flex-wrap: wrap; }
+.quick-btn { background: #fff; border-color: #c7d6ff; font-weight: 600; }
+
+/* Markov prediction highlight */
+.predicted {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hint, .announce, .offer {
+  font-size: 13px; padding: 9px 12px; border-radius: 8px; margin-bottom: 12px;
+}
+.hint { background: #fff; border: 1px dashed var(--line); color: var(--muted); }
+.announce { background: #fff8e6; border: 1px solid #f2dfa8; color: var(--warn); }
+.offer {
+  background: #fff; border: 1px solid var(--accent);
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+}
+
+.help-text { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+.model pre { white-space: pre-wrap; font-size: 12px; color: var(--ink); margin: 0; }
+.tag {
+  font-size: 11px; background: var(--accent-soft); color: var(--accent);
+  padding: 2px 7px; border-radius: 20px; margin-left: 6px;
+}
+footer { margin-top: 18px; }
+
+/* --- adaptive states --- */
+
+/* Fluent user: instructional text is hidden to cut clutter. */
+body[data-help="minimal"] .help-text { display: none; }
+
+/* Struggling user: instructions get bigger and are always visible. */
+body[data-help="verbose"] .help-text { font-size: 14px; color: var(--ink); }
+
+/* Offered readability changes. */
+body.large-text { font-size: 18px; }
+body.large-text button { padding: 12px 16px; font-size: 16px; }
+body.high-contrast {
+  --bg: #ffffff; --panel: #ffffff; --ink: #000000;
+  --muted: #333333; --line: #000000; --accent: #0033cc;
+}

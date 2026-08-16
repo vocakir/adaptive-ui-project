@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adaptive Task Dashboard</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-help="normal">
+
+<header class="top">
+  <h1>Adaptive Task Dashboard</h1>
+  <div class="controls">
+    <label class="switch">
+      <input type="checkbox" id="toggle-adaptive"> Adaptation
+    </label>
+    <button id="why" class="link">Why am I seeing this?</button>
+    <button id="reset" class="link">Reset learning</button>
+  </div>
+</header>
+
+<div id="announce" class="announce" role="status" hidden></div>
+
+<div id="offer" class="offer" hidden>
+  <span id="offer-text"></span>
+  <button id="offer-yes">Yes</button>
+  <button id="offer-no">No thanks</button>
+</div>
+
+<section id="quick-actions-wrap" class="quick-wrap" hidden>
+  <h2>Quick actions <small>(learned from how you work)</small></h2>
+  <div id="quick-actions" class="quick"></div>
+</section>
+
+<p id="next-hint" class="hint" hidden></p>
+
+<main>
+  <section class="pane">
+    <div class="row">
+      <input id="task-input" type="text" placeholder="What needs doing?" aria-label="New task">
+      <button data-action="addTask">Add task</button>
+    </div>
+
+    <ul id="task-list" class="tasks"></ul>
+    <p class="help-text">Click a task to select it, double-click to mark it done.</p>
+    <button id="undo" class="undo" hidden>Undo delete</button>
+  </section>
+
+  <aside class="pane">
+    <h2>All actions</h2>
+    <div class="grid">
+      <button data-action="completeTask">Complete task</button>
+      <button data-action="deleteTask">Delete task</button>
+      <button data-action="searchTask">Search</button>
+      <button data-action="filterTasks" id="filter" data-mode="all">Filter: all</button>
+      <button data-action="startTimer" id="timer">Focus timer</button>
+      <button data-action="openNotes">Notes</button>
+      <button data-action="viewStats">Stats</button>
+      <button data-action="exportData">Export</button>
+    </div>
+
+    <div id="search-panel" class="panel" hidden>
+      <input id="search-input" type="text" placeholder="Search tasks" aria-label="Search tasks">
+    </div>
+
+    <div id="notes-panel" class="panel" hidden>
+      <textarea rows="4" placeholder="Scratch notes"></textarea>
+    </div>
+
+    <div id="stats-panel" class="panel" hidden>
+      <p id="stats-body"></p>
+    </div>
+  </aside>
+</main>
+
+<section id="model-panel" class="panel model" hidden>
+  <h2>What the system has learned <span id="help-level" class="tag"></span></h2>
+  <pre id="model-body"></pre>
+  <p class="help-text">
+    All of this stays in your browser. Nothing is uploaded. Use "Reset learning" to erase it.
+  </p>
+</section>
+
+<footer>
+  <p class="help-text">Adaptive UI using AI &mdash; HCI course project.</p>
+</footer>
+
+<script src="js/model.js"></script>
+<script src="js/predictor.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/adaptive.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
